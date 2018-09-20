@@ -10,7 +10,11 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Lodě");
+            Map map = new Map();
+            map.SizeX = 10;
+            map.SizeY = 10;
+
+            map.CreateMap();
         }
     }
 }
