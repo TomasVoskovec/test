@@ -6,11 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1
 {
-    class Program
+    class Map
     {
-        static void Main(string[] args)
-        {
-            Console.WriteLine("Lodě");
-        }
     }
 }

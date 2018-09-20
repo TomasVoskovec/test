@@ -6,11 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1
 {
-    class Program
+    class Player
     {
-        static void Main(string[] args)
-        {
-            Console.WriteLine("Lodě");
-        }
     }
 }
