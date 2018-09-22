@@ -11,7 +11,21 @@ namespace ConsoleApp1
         public int SizeX = 10;
         public int SizeY = 10;
 
-        private List<int> polickoLod = new List<int>(new int[] {2,2});
+        private List<Field> fields = new List<Field>();
+        private List<int> polickoLod = new List<int>(new int[] { 7, 4 });
+
+        public void CreateField(int x, int y)
+        {
+            fields.Add(new Field() {X = x, Y = x});
+        }
+
+        public void WriteFields()
+        {
+            foreach (Field field in fields)
+            {
+                Console.Write("x:{0} y:{1}", field.X, field.Y);
+            }
+        }
 
         public void CreateMap()
         {

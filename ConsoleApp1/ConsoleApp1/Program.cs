@@ -11,10 +11,19 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
             Map map = new Map();
-            map.SizeX = 10;
+            map.SizeX = 20;
             map.SizeY = 10;
 
+            for(int i = 0; i <= 9; i++)
+            {
+                map.CreateField(i, i);
+            }
+
+            //map.CreateField(2,2);
+
             map.CreateMap();
+
+            map.WriteFields();
         }
     }
 }
