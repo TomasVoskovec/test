@@ -16,28 +16,41 @@ namespace ConsoleApp1
 
         public void CreateField(int x, int y)
         {
-            fields.Add(new Field() {X = x, Y = x});
+            if (!fields.Contains(new Field {X = x, Y = x}))
+            {
+                fields.Add(new Field { X = x, Y = y });
+            }
         }
 
         public void WriteFields()
         {
             foreach (Field field in fields)
             {
-                Console.Write("x:{0} y:{1}", field.X, field.Y);
+                Console.Write("x:{0} y:{1}, ", field.X, field.Y);
             }
         }
 
         public void CreateMap()
         {
+            List<int> fieldsX = new List<int>();
+            List<int> fieldsY = new List<int>();
+
+            foreach (Field field in fields)
+            {
+                fieldsX.Add(field.X);
+                fieldsY.Add(field.Y);
+            }
+            int z = 0;
             for (int i = 1; i <= SizeY; i++)
             {
-                if (i == polickoLod[1])
+                if (fieldsY.Contains(i))
                 {
+                    int currFieldX = fieldsY.IndexOf(i);
                     for (int j = 1; j <= SizeX; j++)
                     {
-                        if (j == polickoLod[0])
+                        if (j == fieldsX[currFieldX])
                         {
-                            Console.Write("0");
+                            Console.Write("0");                            
                         }
                         else
                         {
