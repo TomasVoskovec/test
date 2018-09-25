@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,64 +8,80 @@ namespace ConsoleApp1
 {
     class Map
     {
-        public int SizeX = 10;
-        public int SizeY = 10;
+        public static int SizeX = 10;
+        public static int SizeY = 10;
 
-        private List<Field> fields = new List<Field>();
-        private List<int> polickoLod = new List<int>(new int[] { 7, 4 });
+        private static List<Field> createdFields = new List<Field>();
 
-        public void CreateField(int x, int y)
+        //Vytvoreni prazdnych poli
+        private static List<Field> createMap()
         {
-            if (!fields.Contains(new Field {X = x, Y = x}))
-            {
-                fields.Add(new Field { X = x, Y = y });
-            }
-        }
-
-        public void WriteFields()
-        {
-            foreach (Field field in fields)
-            {
-                Console.Write("x:{0} y:{1}, ", field.X, field.Y);
-            }
-        }
-
-        public void CreateMap()
-        {
-            List<int> fieldsX = new List<int>();
-            List<int> fieldsY = new List<int>();
-
-            foreach (Field field in fields)
-            {
-                fieldsX.Add(field.X);
-                fieldsY.Add(field.Y);
-            }
-            int z = 0;
+            List<Field> fields = new List<Field>();
+            //Y
             for (int i = 1; i <= SizeY; i++)
             {
-                if (fieldsY.Contains(i))
+                //X
+                for (int j = 1; j <= SizeX; j++)
                 {
-                    int currFieldX = fieldsY.IndexOf(i);
-                    for (int j = 1; j <= SizeX; j++)
+                    fields.Add(new Field
                     {
-                        if (j == fieldsX[currFieldX])
+                        X = j,
+                        Y = i
+                    });
+                }
+            }
+            return fields;
+        }
+
+        //Pridani funkcniho pole
+        public void AddField(int x, int y, int type)
+        {
+            createdFields.Add(new Field
+            {
+                X = x,
+                Y = y,
+                Type = type
+            });
+        }
+
+        //Generovani Mapy
+        public static void GenerateMap()
+        {
+            List<Field> generatedFields = createMap();
+            bool otherField = false;
+
+            foreach (Field generatedField in generatedFields)
+            {
+                foreach (Field createdField in createdFields)
+                {
+                    if (generatedField.X == createdField.X && generatedField.Y == createdField.Y)
+                    {
+                        if (createdField.Type == 1)
                         {
-                            Console.Write("0");                            
-                        }
-                        else
-                        {
-                            Console.Write("#");
+                            Console.Write("■");
+                            otherField = true;
                         }
                     }
                 }
-                else
+                //Kontrola vypsani znaku
+                if (!otherField)
                 {
-                    for (int j = 1; j <= SizeX; j++)
-                    {
-                        Console.Write("#");
-                    }
+                    Console.Write("L");
                 }
-                Console.WriteLine();
+                otherField = false;
+                //Kontrola radku
+                if (generatedField.X == SizeX)
+                {
+                    Console.WriteLine();
+                }
+            }
+        }
+
+        public void AllCreatedFields()
+        {
+            foreach (Field createdField in createdFields)
+            {
+                Console.WriteLine("{{X: {0}, Y: {1}, Type: {2}}} ", createdField.X, createdField.Y, createdField.Type);
             }
         }
     }
