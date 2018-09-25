@@ -14,12 +14,12 @@ namespace ConsoleApp1
             Map.SizeX = 10;
             Map.SizeY = 10;
 
-            map.AddField(5, 5, 1);
-            map.AddField(6, 5, 1);
+            map.CreateShip(2);
 
             Map.GenerateMap();
 
             map.AllCreatedFields();
+            //map.ReadKey();
         }
     }
 }

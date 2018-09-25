@@ -12,6 +12,32 @@ namespace ConsoleApp1
         public static int SizeY = 10;
 
         private static List<Field> createdFields = new List<Field>();
+        private List<Ship> ships = new List<Ship>();
+
+        public int GetArrowKey ()
+        {
+            var key = Console.ReadKey();
+            if (key.Key == ConsoleKey.LeftArrow)
+            {
+                return 1;
+            }
+            if (key.Key == ConsoleKey.UpArrow)
+            {
+                return 2;
+            }
+            if (key.Key == ConsoleKey.DownArrow)
+            {
+                return 3;
+            }
+            if (key.Key == ConsoleKey.RightArrow)
+            {
+                return 4;
+            }
+            else
+            {
+                return 5;
+            }
+        }
 
         //Vytvoreni prazdnych poli
         private static List<Field> createMap()
@@ -45,22 +71,28 @@ namespace ConsoleApp1
         }
 
         //Pridani lodi
-        public void CreateShipField(int type)
+        public void CreateShip(int type)
         {
             if (type == 1)
             {
                 for (int i = 0; i >= 1; i++)
                 {
-                    AddField(1, 1, 1);
+                    AddField(1 + i, 1, 1);
+                    ships.Add(new Ship })
+                }
+            }
+            if (type == 2)
+            {
+                for (int i = 0; i >= 2; i++)
+                {
+                    AddField(1 + i, 1, 1);
                 }
             }
             else
             {
                 Console.WriteLine("Spatne zadany typ lodi");
             }
-        }
-
-        //while (shipSe)
+        }        
 
         //Generovani Mapy
         public static void GenerateMap()
@@ -91,6 +123,21 @@ namespace ConsoleApp1
                 if (generatedField.X == SizeX)
                 {
                     Console.WriteLine();
+                }
+            }
+        }
+
+        public void moveBoat()
+        {
+            bool boatSellection = true;
+
+            while (boatSellection)
+            {
+                int sellection = GetArrowKey();
+
+                if(sellection == 1)
+                {
+
                 }
             }
         }
