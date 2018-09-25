@@ -44,6 +44,24 @@ namespace ConsoleApp1
             });
         }
 
+        //Pridani lodi
+        public void CreateShipField(int type)
+        {
+            if (type == 1)
+            {
+                for (int i = 0; i >= 1; i++)
+                {
+                    AddField(1, 1, 1);
+                }
+            }
+            else
+            {
+                Console.WriteLine("Spatne zadany typ lodi");
+            }
+        }
+
+        //while (shipSe)
+
         //Generovani Mapy
         public static void GenerateMap()
         {

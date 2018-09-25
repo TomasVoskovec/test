@@ -8,5 +8,6 @@ namespace ConsoleApp1
 {
     class Ship
     {
+        public List<Field> BoatFields = new List<Field>();
     }
 }
