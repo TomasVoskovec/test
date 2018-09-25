@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,17 +11,15 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
             Map map = new Map();
-            map.SizeX = 10;
-            map.SizeY = 10;
+            Map.SizeX = 10;
+            Map.SizeY = 10;
 
-            map.CreateField(2, 3);
-            map.CreateField(7, 7);
-            map.CreateField(5, 5);
-            map.CreateField(5, 5);
+            map.AddField(5, 5, 1);
+            map.AddField(6, 5, 1);
 
-            map.CreateMap();
+            Map.GenerateMap();
 
-            map.WriteFields();
+            map.AllCreatedFields();
         }
     }
 }
