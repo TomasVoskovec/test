@@ -12,6 +12,5 @@ namespace ConsoleApp1
         public int Y { get; set; }
         //
         public int Type { get; set; }
-        //public int State;
     }
 }
