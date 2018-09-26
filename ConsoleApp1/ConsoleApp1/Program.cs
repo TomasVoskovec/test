@@ -14,7 +14,9 @@ namespace ConsoleApp1
             Map.SizeX = 10;
             Map.SizeY = 10;
 
-            map.CreateShip(2);
+            map.CreateShip(1);
+
+            //map.AddField(4, 4, 1);
 
             Map.GenerateMap();
 

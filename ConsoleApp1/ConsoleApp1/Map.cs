@@ -11,6 +11,8 @@ namespace ConsoleApp1
         public static int SizeX = 10;
         public static int SizeY = 10;
 
+        private int boatID;
+
         private static List<Field> createdFields = new List<Field>();
         private List<Ship> ships = new List<Ship>();
 
@@ -70,27 +72,37 @@ namespace ConsoleApp1
             });
         }
 
+        //Prevedeni lode na policka
+        private void shipToFields(List<Field> ship)
+        {
+            foreach (Field shipField in ship)
+            {
+                AddField(shipField.X, shipField.Y, 1);
+            }
+        }
+
         //Pridani lodi
         public void CreateShip(int type)
         {
+            List<Field> ship = new List<Field>();
+            bool shipCreated = true;
+
             if (type == 1)
             {
                 for (int i = 0; i >= 1; i++)
                 {
-                    AddField(1 + i, 1, 1);
-                    ships.Add(new Ship })
-                }
-            }
-            if (type == 2)
-            {
-                for (int i = 0; i >= 2; i++)
-                {
-                    AddField(1 + i, 1, 1);
+                    ship.Add(new Field { X = 1 + i, Y = 1, Type = 1 });
                 }
             }
             else
             {
                 Console.WriteLine("Spatne zadany typ lodi");
+                shipCreated = false;
+            }
+
+            if (shipCreated)
+            {
+                ships.Add(new Ship{ BoatFields = ship });
             }
         }        
 
