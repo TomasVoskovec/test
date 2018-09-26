@@ -89,7 +89,9 @@ namespace ConsoleApp1
 
             if (type == 1)
             {
-                for (int i = 0; i >= 1; i++)
+                //ship.Add(new Field { X = 1, Y = 1, Type = 1 });
+
+                for (int i = 0; i < 2; i++)
                 {
                     ship.Add(new Field { X = 1 + i, Y = 1, Type = 1 });
                 }
@@ -103,8 +105,20 @@ namespace ConsoleApp1
             if (shipCreated)
             {
                 ships.Add(new Ship{ BoatFields = ship });
+                boatID++;
             }
-        }        
+        }
+
+        //Ulozeni lodi
+        public void placeShip(int shipID)
+        {
+            List<Field> ship = ships[shipID].BoatFields;
+
+            foreach (Field shipField in ship)
+            {
+                createdFields.Add(new Field { X = shipField.X, Y = shipField.Y, Type = 1 });
+            }
+        }
 
         //Generovani Mapy
         public static void GenerateMap()
