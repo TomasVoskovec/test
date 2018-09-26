@@ -11,12 +11,13 @@ namespace ConsoleApp1
         public static int SizeX = 10;
         public static int SizeY = 10;
 
-        private int boatID;
+        private int boatID = 0;
 
         private static List<Field> createdFields = new List<Field>();
         private List<Ship> ships = new List<Ship>();
 
-        public int GetArrowKey ()
+        //Key to int sipky
+        public int GetKey ()
         {
             var key = Console.ReadKey();
             if (key.Key == ConsoleKey.LeftArrow)
@@ -90,7 +91,6 @@ namespace ConsoleApp1
             if (type == 1)
             {
                 //ship.Add(new Field { X = 1, Y = 1, Type = 1 });
-
                 for (int i = 0; i < 2; i++)
                 {
                     ship.Add(new Field { X = 1 + i, Y = 1, Type = 1 });
@@ -105,19 +105,19 @@ namespace ConsoleApp1
             if (shipCreated)
             {
                 ships.Add(new Ship{ BoatFields = ship });
-                boatID++;
             }
         }
 
         //Ulozeni lodi
-        public void placeShip(int shipID)
+        public void placeShip()
         {
-            List<Field> ship = ships[shipID].BoatFields;
+            List<Field> ship = ships[boatID].BoatFields;
 
             foreach (Field shipField in ship)
             {
                 createdFields.Add(new Field { X = shipField.X, Y = shipField.Y, Type = 1 });
             }
+            boatID++;
         }
 
         //Generovani Mapy
@@ -153,17 +153,108 @@ namespace ConsoleApp1
             }
         }
 
+        //Kontrola souradnic
+        /*
+        private bool dirControl(List<Field> fields, int dir)
+        {
+            if (dir == 1)
+            {
+                foreach (Field field in fields)
+                {
+                    if ()
+                }
+            }
+        }
+        */
+
+        /*
+         * Left Arrow == 1
+         * Up Arrow == 2
+         * Down Arrow == 3
+         * Right Arrow == 4
+         * 
+         * Other Key == 5
+        */
+
+        //Pohybovani lodi (sipky)
         public void moveBoat()
         {
             bool boatSellection = true;
+            bool dirControl = true;
+
+            List<Field> shipFields = ships[boatID].BoatFields;
 
             while (boatSellection)
             {
-                int sellection = GetArrowKey();
+                int move = GetKey();
 
-                if(sellection == 1)
+                if(move == 1)
                 {
-
+                    foreach (Field shipField in shipFields)
+                    {
+                        if (shipField.X == 1)
+                        {
+                            dirControl = false;
+                        }
+                    }
+                    if (dirControl)
+                    {
+                        foreach (Field shipField in shipFields)
+                        {
+                            shipField.X++;
+                        }
+                    }
+                }
+                if (move == 2)
+                {
+                    foreach (Field shipField in shipFields)
+                    {
+                        if (shipField.Y == 1)
+                        {
+                            dirControl = false;
+                        }
+                    }
+                    if (dirControl)
+                    {
+                        foreach (Field shipField in shipFields)
+                        {
+                            shipField.X++;
+                        }
+                    }
+                }
+                if (move == 3)
+                {
+                    foreach (Field shipField in shipFields)
+                    {
+                        if (shipField.Y == 10)
+                        {
+                            dirControl = false;
+                        }
+                    }
+                    if (dirControl)
+                    {
+                        foreach (Field shipField in shipFields)
+                        {
+                            shipField.X++;
+                        }
+                    }
+                }
+                if (move == 4)
+                {
+                    foreach (Field shipField in shipFields)
+                    {
+                        if (shipField.X == 10)
+                        {
+                            dirControl = false;
+                        }
+                    }
+                    if (dirControl)
+                    {
+                        foreach (Field shipField in shipFields)
+                        {
+                            shipField.X++;
+                        }
+                    }
                 }
             }
         }
