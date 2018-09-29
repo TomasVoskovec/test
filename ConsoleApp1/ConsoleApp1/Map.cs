@@ -8,40 +8,14 @@ namespace ConsoleApp1
 {
     class Map
     {
-        public int SizeX = 10;
-        public int SizeY = 10;
+        public int SizeX = 20;
+        public int SizeY = 20;
 
         public bool MoveShip = true;
         private int boatID = 0;
 
         private List<Field> createdFields = new List<Field>();
         private List<Ship> ships = new List<Ship>();
-
-        //Key to int sipky
-        public int GetKey ()
-        {
-            var key = Console.ReadKey();
-            if (key.Key == ConsoleKey.LeftArrow)
-            {
-                return 1;
-            }
-            if (key.Key == ConsoleKey.UpArrow)
-            {
-                return 2;
-            }
-            if (key.Key == ConsoleKey.DownArrow)
-            {
-                return 3;
-            }
-            if (key.Key == ConsoleKey.RightArrow)
-            {
-                return 4;
-            }
-            else
-            {
-                return 5;
-            }
-        }
 
         //Vytvoreni prazdnych poli
         private List<Field> createMap()
@@ -94,7 +68,54 @@ namespace ConsoleApp1
 
             while (!correctChose)
             {
-                //Console.Clear();
+                Console.WriteLine("Vyberte lod:");
+                Console.WriteLine();
+
+                Console.WriteLine("-----------------------------------");
+                Console.WriteLine("1: ■ (ponorka)");
+
+                Console.WriteLine("-----------------------------------");
+                Console.WriteLine("2: ■■ (torpedoborec)");
+
+                Console.WriteLine("-----------------------------------");
+                Console.WriteLine("3: ■■■ (kriznik)");
+
+                Console.WriteLine("-----------------------------------");
+                Console.WriteLine("4: ■■■■ (bitevni lod)");
+
+                Console.WriteLine("-----------------------------------");
+                Console.WriteLine("5: ■■■■■ (letadlova lod)");
+
+                Console.WriteLine("-----------------------------------");
+                Console.WriteLine("   ■■■");
+                Console.WriteLine("6: ■■■ (pristavaci zakladna)");
+
+                Console.WriteLine("-----------------------------------");
+                Console.WriteLine("    ■");
+                Console.WriteLine("7: ■ ■ (hydroplan)");
+
+                Console.WriteLine("-----------------------------------");
+                Console.WriteLine("    ■");
+                Console.WriteLine("8: ■■■ (kriznik II)");
+
+                Console.WriteLine("-----------------------------------");
+                Console.WriteLine("    ■");
+                Console.WriteLine("9: ■■■ (tezky kriznik)");
+                Console.WriteLine("    ■");
+
+                Console.WriteLine("-----------------------------------");
+                Console.WriteLine("    ■ ■");
+                Console.WriteLine("10: ■■■ (katamaran)");
+                Console.WriteLine("    ■ ■");
+
+                Console.WriteLine("-----------------------------------");
+                Console.WriteLine("    ■");
+                Console.WriteLine("11: ■■ (lehka bitevni lod)");
+
+                Console.WriteLine("-----------------------------------");
+                Console.WriteLine("       ■■");
+                Console.WriteLine("12: ■■■■■ (letadlova lod II)");
+                Console.WriteLine("-----------------------------------");
 
                 int type = 0;
 
@@ -292,7 +313,7 @@ namespace ConsoleApp1
                     {
                         if (shipField.Type == 1)
                         {
-                            Console.Write("O");
+                            Console.Write("■");
                             boatField = true;
                             otherField = true;
                         }
@@ -312,7 +333,7 @@ namespace ConsoleApp1
                 //Kontrola vypsani znaku
                 if (!otherField)
                 {
-                    Console.Write("L");
+                    Console.Write("#");
                 }
                 otherField = false;
                 //Kontrola radku
@@ -322,20 +343,6 @@ namespace ConsoleApp1
                 }
             }
         }
-
-        //Kontrola souradnic
-        /*
-        private bool dirControl(List<Field> fields, int dir)
-        {
-            if (dir == 1)
-            {
-                foreach (Field field in fields)
-                {
-                    if ()
-                }
-            }
-        }
-        */
 
         /*
          * Left Arrow == 1
@@ -396,7 +403,7 @@ namespace ConsoleApp1
                 {
                     foreach (Field shipField in shipFields)
                     {
-                        if (shipField.Y == 10)
+                        if (shipField.Y == SizeY)
                         {
                             dirControl = false;
                         }
@@ -413,7 +420,7 @@ namespace ConsoleApp1
                 {
                     foreach (Field shipField in shipFields)
                     {
-                        if (shipField.X == 10)
+                        if (shipField.X == SizeX)
                         {
                             dirControl = false;
                         }
@@ -437,6 +444,7 @@ namespace ConsoleApp1
             placeShip();
         }
 
+        //Vypsani souradnic vsech vytvorenych policek
         public void AllCreatedFields()
         {
             foreach (Field createdField in createdFields)

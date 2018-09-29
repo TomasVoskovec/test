@@ -11,8 +11,6 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
             Map map = new Map();
-            map.SizeX = 10;
-            map.SizeY = 10;
 
             bool game = true;
 
