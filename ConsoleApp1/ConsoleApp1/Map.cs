@@ -8,12 +8,13 @@ namespace ConsoleApp1
 {
     class Map
     {
-        public static int SizeX = 10;
-        public static int SizeY = 10;
+        public int SizeX = 10;
+        public int SizeY = 10;
 
+        public bool MoveShip = true;
         private int boatID = 0;
 
-        private static List<Field> createdFields = new List<Field>();
+        private List<Field> createdFields = new List<Field>();
         private List<Ship> ships = new List<Ship>();
 
         //Key to int sipky
@@ -43,7 +44,7 @@ namespace ConsoleApp1
         }
 
         //Vytvoreni prazdnych poli
-        private static List<Field> createMap()
+        private List<Field> createMap()
         {
             List<Field> fields = new List<Field>();
             //Y
@@ -83,54 +84,223 @@ namespace ConsoleApp1
         }
 
         //Pridani lodi
-        public void CreateShip(int type)
+        public void CreateShip()
         {
+            Console.Clear();
             List<Field> ship = new List<Field>();
             bool shipCreated = true;
 
-            if (type == 1)
+            bool correctChose = false;
+
+            while (!correctChose)
             {
-                //ship.Add(new Field { X = 1, Y = 1, Type = 1 });
-                for (int i = 0; i < 2; i++)
+                //Console.Clear();
+
+                int type = 0;
+
+                bool chose = true;
+                while (chose)
                 {
-                    ship.Add(new Field { X = 1 + i, Y = 1, Type = 1 });
+                    try
+                    {
+                        int key = Convert.ToInt32(Console.ReadLine());
+                        type = key;
+                        chose = false;
+                    }
+                    catch (FormatException)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Spatne zadany typ lode");
+                    }
                 }
-            }
-            else
-            {
-                Console.WriteLine("Spatne zadany typ lodi");
-                shipCreated = false;
+
+                //Ponorka
+                if (type == 1)
+                {
+                    for (int i = 0; i < 1; i++)
+                    {
+                        ship.Add(new Field { X = 1 + i, Y = 1, Type = 1 });
+                    }
+                    correctChose = true;
+                }
+                //Torpedoborec
+                else if (type == 2)
+                {
+                    for (int i = 0; i < 2; i++)
+                    {
+                        ship.Add(new Field { X = 1 + i, Y = 1, Type = 1 });
+                    }
+                    correctChose = true;
+                }
+                //Kriznik
+                else if (type == 3)
+                {
+                    for (int i = 0; i < 3; i++)
+                    {
+                        ship.Add(new Field { X = 1 + i, Y = 1, Type = 1 });
+                    }
+                    correctChose = true;
+                }
+                //Bitevni lod
+                else if (type == 4)
+                {
+                    for (int i = 0; i < 4; i++)
+                    {
+                        ship.Add(new Field { X = 1 + i, Y = 1, Type = 1 });
+                    }
+                    correctChose = true;
+                }
+                //Letadlova lod
+                else if (type == 5)
+                {
+                    for (int i = 0; i < 5; i++)
+                    {
+                        ship.Add(new Field { X = 1 + i, Y = 1, Type = 1 });
+                    }
+                    correctChose = true;
+                }
+                //Pristavaci zakladna
+                else if (type == 6)
+                {
+                    for (int i = 0; i < 3; i++)
+                    {
+                        ship.Add(new Field { X = 1 + i, Y = 1, Type = 1 });
+                    }
+                    for (int i = 0; i < 3; i++)
+                    {
+                        ship.Add(new Field { X = 1 + i, Y = 2, Type = 1 });
+                    }
+                    correctChose = true;
+                }
+                //Hydroplan
+                else if (type == 7)
+                {
+                    ship.Add(new Field { X = 1, Y = 2, Type = 1 });
+                    ship.Add(new Field { X = 2, Y = 1, Type = 1 });
+                    ship.Add(new Field { X = 3, Y = 2, Type = 1 });
+                    correctChose = true;
+                }
+                //Kriznik II
+                else if (type == 8)
+                {
+                    ship.Add(new Field { X = 1, Y = 2, Type = 1 });
+                    ship.Add(new Field { X = 2, Y = 1, Type = 1 });
+                    ship.Add(new Field { X = 2, Y = 2, Type = 1 });
+                    ship.Add(new Field { X = 3, Y = 2, Type = 1 });
+                    correctChose = true;
+                }
+                //Tezky kriznik
+                else if (type == 9)
+                {
+                    ship.Add(new Field { X = 1, Y = 2, Type = 1 });
+                    ship.Add(new Field { X = 2, Y = 1, Type = 1 });
+                    ship.Add(new Field { X = 2, Y = 2, Type = 1 });
+                    ship.Add(new Field { X = 2, Y = 3, Type = 1 });
+                    ship.Add(new Field { X = 3, Y = 2, Type = 1 });
+                    correctChose = true;
+                }
+                //Katamaran
+                else if (type == 10)
+                {
+                    ship.Add(new Field { X = 1, Y = 1, Type = 1 });
+                    ship.Add(new Field { X = 1, Y = 2, Type = 1 });
+                    ship.Add(new Field { X = 1, Y = 3, Type = 1 });
+                    ship.Add(new Field { X = 2, Y = 2, Type = 1 });
+                    ship.Add(new Field { X = 3, Y = 1, Type = 1 });
+                    ship.Add(new Field { X = 3, Y = 2, Type = 1 });
+                    ship.Add(new Field { X = 3, Y = 3, Type = 1 });
+                    correctChose = true;
+                }
+                //Lehka bitevni lod
+                else if (type == 11)
+                {
+                    ship.Add(new Field { X = 1, Y = 1, Type = 1 });
+                    ship.Add(new Field { X = 1, Y = 2, Type = 1 });
+                    ship.Add(new Field { X = 2, Y = 2, Type = 1 });
+                    correctChose = true;
+                }
+                //Letadlova lod II
+                else if (type == 12)
+                {
+                    for (int i = 0; i < 2; i++)
+                    {
+                        ship.Add(new Field { X = 4 + i, Y = 1, Type = 1 });
+                    }
+                    for (int i = 0; i < 5; i++)
+                    {
+                        ship.Add(new Field { X = 1 + i, Y = 2, Type = 1 });
+                    }
+                    correctChose = true;
+                }
+                else
+                {
+                    Console.Clear();
+                    Console.WriteLine("Spatne zadany typ lodi");
+                    correctChose = false;
+                    shipCreated = false;
+                }
             }
 
             if (shipCreated)
             {
                 ships.Add(new Ship{ BoatFields = ship });
             }
+            boatID++;
         }
 
         //Ulozeni lodi
         public void placeShip()
         {
-            List<Field> ship = ships[boatID].BoatFields;
+            List<Field> ship = ships[boatID-1].BoatFields;
 
-            foreach (Field shipField in ship)
+            bool placeControl = true;
+
+            foreach (Field createdField in createdFields)
             {
-                createdFields.Add(new Field { X = shipField.X, Y = shipField.Y, Type = 1 });
+                foreach (Field shipField in ship)
+                {
+                    if (shipField.X == createdField.X && shipField.Y == createdField.Y && shipField.Type == createdField.Type || shipField.X - 1 == createdField.X && shipField.Y == createdField.Y && shipField.Type == createdField.Type || shipField.X + 1 == createdField.X && shipField.Y == createdField.Y && shipField.Type == createdField.Type || shipField.X == createdField.X && shipField.Y + 1 == createdField.Y && shipField.Type == createdField.Type || shipField.X == createdField.X && shipField.Y - 1 == createdField.Y && shipField.Type == createdField.Type)
+                    {
+                        placeControl = false;
+                    }
+                }
             }
-            boatID++;
+            if (placeControl)
+            {
+                foreach (Field shipField in ship)
+                {
+                    createdFields.Add(new Field { X = shipField.X, Y = shipField.Y, Type = 1 });
+                }
+                CreateShip();
+                Console.Clear();
+            }
         }
 
-        //Generovani Mapy
-        public static void GenerateMap()
+        //Vykresleni Mapy
+        public void GenerateMap()
         {
             List<Field> generatedFields = createMap();
             bool otherField = false;
 
             foreach (Field generatedField in generatedFields)
             {
+                bool boatField = false;
+                List<Field> ship = ships[boatID-1].BoatFields;
+                foreach (Field shipField in ship)
+                {
+                    if (generatedField.X == shipField.X && generatedField.Y == shipField.Y)
+                    {
+                        if (shipField.Type == 1)
+                        {
+                            Console.Write("O");
+                            boatField = true;
+                            otherField = true;
+                        }
+                    }
+                }
                 foreach (Field createdField in createdFields)
                 {
-                    if (generatedField.X == createdField.X && generatedField.Y == createdField.Y)
+                    if (generatedField.X == createdField.X && generatedField.Y == createdField.Y && boatField == false)
                     {
                         if (createdField.Type == 1)
                         {
@@ -177,18 +347,18 @@ namespace ConsoleApp1
         */
 
         //Pohybovani lodi (sipky)
-        public void moveBoat()
+        public void MoveBoat()
         {
-            bool boatSellection = true;
-            bool dirControl = true;
+            bool moveBoat = true;
 
-            List<Field> shipFields = ships[boatID].BoatFields;
+            List<Field> shipFields = ships[boatID-1].BoatFields;
 
-            while (boatSellection)
+            while (moveBoat)
             {
-                int move = GetKey();
+                bool dirControl = true;
+                var key = Console.ReadKey();
 
-                if(move == 1)
+                if(key.Key == ConsoleKey.LeftArrow)
                 {
                     foreach (Field shipField in shipFields)
                     {
@@ -201,11 +371,11 @@ namespace ConsoleApp1
                     {
                         foreach (Field shipField in shipFields)
                         {
-                            shipField.X++;
+                            shipField.X--;
                         }
                     }
                 }
-                if (move == 2)
+                if (key.Key == ConsoleKey.UpArrow)
                 {
                     foreach (Field shipField in shipFields)
                     {
@@ -218,11 +388,11 @@ namespace ConsoleApp1
                     {
                         foreach (Field shipField in shipFields)
                         {
-                            shipField.X++;
+                            shipField.Y--;
                         }
                     }
                 }
-                if (move == 3)
+                if (key.Key == ConsoleKey.DownArrow)
                 {
                     foreach (Field shipField in shipFields)
                     {
@@ -235,11 +405,11 @@ namespace ConsoleApp1
                     {
                         foreach (Field shipField in shipFields)
                         {
-                            shipField.X++;
+                            shipField.Y++;
                         }
                     }
                 }
-                if (move == 4)
+                if (key.Key == ConsoleKey.RightArrow)
                 {
                     foreach (Field shipField in shipFields)
                     {
@@ -256,7 +426,15 @@ namespace ConsoleApp1
                         }
                     }
                 }
+                if (key.Key == ConsoleKey.Enter)
+                {
+                    moveBoat = false;
+                }
+                Console.Clear();
+                GenerateMap();
             }
+            MoveShip = true;
+            placeShip();
         }
 
         public void AllCreatedFields()

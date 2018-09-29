@@ -11,18 +11,28 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
             Map map = new Map();
-            Map.SizeX = 10;
-            Map.SizeY = 10;
+            map.SizeX = 10;
+            map.SizeY = 10;
 
-            map.CreateShip(1);
-            map.placeShip();
+            bool game = true;
 
-            //map.AddField(4, 4, 1);
+            map.CreateShip();
 
-            Map.GenerateMap();
+            while (game)
+            {
+                Console.Clear();
 
-            map.AllCreatedFields();
-            //map.ReadKey();
+                //map.placeShip();
+
+                //map.AddField(4, 4, 1);
+
+                map.GenerateMap();
+
+                map.MoveBoat();
+
+                map.AllCreatedFields();
+                //map.ReadKey();
+            }
         }
     }
 }
