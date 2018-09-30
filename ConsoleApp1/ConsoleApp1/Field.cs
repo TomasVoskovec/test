@@ -10,7 +10,8 @@ namespace ConsoleApp1
     {
         public int X { get; set; }
         public int Y { get; set; }
-        //
+
+        //0 = empty, 1 = boat, 2 = scope, 3 = miss, 4 = shot
         public int Type { get; set; }
     }
 }
