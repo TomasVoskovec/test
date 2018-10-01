@@ -86,10 +86,12 @@ namespace ConsoleApp1
         public void CreateShip()
         {
             Console.Clear();
-            List<Field> ship = new List<Field>();
-            bool shipCreated = true;
 
+            List<Field> ship = new List<Field>();
+
+            bool shipCreated = true;
             bool correctChose = false;
+            bool choseControl = true;
 
             if (!IsShipSelection())
             {
@@ -169,9 +171,30 @@ namespace ConsoleApp1
                     }
                     catch (FormatException)
                     {
-                        Console.Clear();
                         Console.WriteLine("Spatne zadany typ lode");
                     }
+                    catch
+                    {
+
+                    }
+
+                    /*foreach (int selectedBoat in selectedBoats)
+                    {
+                        if (selectedBoat == type)
+                        {
+                        }
+                    }
+
+                    if (type == 0 || type > 12)
+                    {
+                        choseControl = false;
+                    }
+
+                    if (!choseControl)
+                    {
+                        chose = true;
+                        choseControl = false;
+                    }*/
                 }
 
                 //Ponorka
@@ -318,7 +341,6 @@ namespace ConsoleApp1
                 }*/
                 else
                 {
-                    Console.Clear();
                     Console.WriteLine("Lod je jiz zabrana nebo jste spatne zadal typ lodi");
                     correctChose = false;
                     shipCreated = false;
@@ -587,6 +609,7 @@ namespace ConsoleApp1
         {
             bool shoot = true;
             bool hit = false;
+            bool hited = false;
             Hit = false;
 
             int type = 3;
@@ -678,12 +701,30 @@ namespace ConsoleApp1
             {
                 type = 4;
                 Hit = true;
+
+                Field scopeField = new Field { X = scope.X, Y = scope.Y, Type = type };
+
+                foreach (Field shotField in shotFields)
+                {
+                    if (scopeField.X == shotField.X && scopeField.Y == shotField.Y)
+                    {
+                        hited = true;
+                    }
+                    else
+                    {
+                        hited = false;
+                    }
+                }
             }
-            shotFields.Add(new Field {
-                X = scope.X,
-                Y = scope.Y,
-                Type = type
-            });
+            if (!hited)
+            {
+                shotFields.Add(new Field
+                {
+                    X = scope.X,
+                    Y = scope.Y,
+                    Type = type
+                });
+            }
         }
         
         //Kontrola zdali hrac nevyhral
