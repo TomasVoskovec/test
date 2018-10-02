@@ -8,8 +8,8 @@ namespace ConsoleApp1
 {
     class Map
     {
-        public int SizeX = 10;
-        public int SizeY = 10;
+        public int SizeX = 20;
+        public int SizeY = 20;
 
         public bool MoveShip = true;
         private int boatID = 0;
@@ -19,7 +19,7 @@ namespace ConsoleApp1
         private bool ponorka = true;
         private bool torpedoborec = true;
         private bool kriznik = true;
-        /*private bool bitevniLod = true;
+        private bool bitevniLod = true;
         private bool letadlovaLod = true;
         private bool pristavaciZakladna = true;
         private bool hydroplan = true;
@@ -27,7 +27,8 @@ namespace ConsoleApp1
         private bool tezkyKriznik = true;
         private bool katamaran = true;
         private bool lehkaBitevniLod = true;
-        private bool letadlovaLodII = true;*/
+        private bool letadlovaLodII = true;
+        private bool parnik = true;
 
         private Field scope = new Field
         {
@@ -91,7 +92,6 @@ namespace ConsoleApp1
 
             bool shipCreated = true;
             bool correctChose = false;
-            bool choseControl = true;
 
             if (!IsShipSelection())
             {
@@ -147,6 +147,11 @@ namespace ConsoleApp1
                 Console.WriteLine("12: ■■■■■ (letadlova lod II)");
                 Console.WriteLine("-----------------------------------");
 
+                Console.WriteLine("-----------------------------------");
+                Console.WriteLine("     ■ ■");
+                Console.WriteLine("13: ■■■■■ (parnik)");
+                Console.WriteLine("-----------------------------------");
+
                 int type = 0;
 
                 bool chose = true;
@@ -173,28 +178,6 @@ namespace ConsoleApp1
                     {
                         Console.WriteLine("Spatne zadany typ lode");
                     }
-                    catch
-                    {
-
-                    }
-
-                    /*foreach (int selectedBoat in selectedBoats)
-                    {
-                        if (selectedBoat == type)
-                        {
-                        }
-                    }
-
-                    if (type == 0 || type > 12)
-                    {
-                        choseControl = false;
-                    }
-
-                    if (!choseControl)
-                    {
-                        chose = true;
-                        choseControl = false;
-                    }*/
                 }
 
                 //Ponorka
@@ -229,7 +212,7 @@ namespace ConsoleApp1
                     kriznik = false;
                     correctChose = true;
                     selectedBoats.Add(3);
-                }/*
+                }
                 //Bitevni lod
                 else if (type == 4 && bitevniLod)
                 {
@@ -338,13 +321,29 @@ namespace ConsoleApp1
                     letadlovaLodII = false;
                     correctChose = true;
                     selectedBoats.Add(12);
-                }*/
+                }
+                //Parnik
+                else if (type == 13 && parnik)
+                {
+                    ship.Add(new Field { X = 2, Y = 1, Type = 1 });
+                    ship.Add(new Field { X = 4, Y = 1, Type = 1 });
+                    for (int i = 0; i < 5; i++)
+                    {
+                        ship.Add(new Field { X = 1 + i, Y = 2, Type = 1 });
+                    }
+                    parnik = false;
+                    correctChose = true;
+                    selectedBoats.Add(13);
+                }
                 else
                 {
                     Console.WriteLine("Lod je jiz zabrana nebo jste spatne zadal typ lodi");
                     correctChose = false;
                     shipCreated = false;
+                    chose = true;
+                    boatID++;
                 }
+                shipCreated = true;
             }
 
             if (shipCreated)
@@ -357,7 +356,7 @@ namespace ConsoleApp1
         //Ulozeni lodi
         public void placeShip()
         {
-            List<Field> ship = ships[boatID-1].BoatFields;
+            List<Field> ship = ships[ships.Count-1].BoatFields;
 
             bool placeControl = true;
 
@@ -391,7 +390,7 @@ namespace ConsoleApp1
             foreach (Field generatedField in generatedFields)
             {
                 bool boatField = false;
-                List<Field> ship = ships[boatID-1].BoatFields;
+                List<Field> ship = ships[ships.Count-1].BoatFields;
                 foreach (Field shipField in ship)
                 {
                     if (generatedField.X == shipField.X && generatedField.Y == shipField.Y)
@@ -487,7 +486,7 @@ namespace ConsoleApp1
         {
             bool moveBoat = true;
 
-            List<Field> shipFields = ships[boatID-1].BoatFields;
+            List<Field> shipFields = ships[ships.Count-1].BoatFields;
 
             while (moveBoat)
             {
@@ -594,7 +593,7 @@ namespace ConsoleApp1
 
         public bool IsShipSelection()
         {
-            if(!ponorka && !torpedoborec && !kriznik /*&& !bitevniLod && !letadlovaLod && !pristavaciZakladna && !hydroplan && !kriznikII && !tezkyKriznik && !katamaran && !lehkaBitevniLod && !letadlovaLodII*/)
+            if(!ponorka && !torpedoborec && !kriznik && !bitevniLod && !letadlovaLod && !pristavaciZakladna && !hydroplan && !kriznikII && !tezkyKriznik && !katamaran && !lehkaBitevniLod && !letadlovaLodII && !parnik)
             {
                 return false;
             }
@@ -746,7 +745,7 @@ namespace ConsoleApp1
             {
                 foreach (Field shotField in shotFields)
                 {
-                    if (shipField.X == shotField.X && shipField.Y == shotField.Y)
+                    if (shipField.X == shotField.X && shipField.Y == shotField.Y && shotField.Type == 4)
                     {
                         shots++;
                     }
